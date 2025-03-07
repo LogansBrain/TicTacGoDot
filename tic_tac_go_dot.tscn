@@ -1,0 +1,84 @@
+[gd_scene load_steps=2 format=3 uid="uid://qjcyy77gysg"]
+
+[ext_resource type="Script" uid="uid://dilu62r6vsx4n" path="res://tic_tac_go_dot.gd" id="1_brnko"]
+
+[node name="TicTacGoDot" type="Node2D"]
+script = ExtResource("1_brnko")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+offset_left = 77.0
+offset_top = 138.0
+offset_right = 625.0
+offset_bottom = 686.0
+columns = 3
+
+[node name="btnSquare1" type="Button" parent="GridContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+
+[node name="btnSquare2" type="Button" parent="GridContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+
+[node name="btnSquare3" type="Button" parent="GridContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+
+[node name="btnSquare4" type="Button" parent="GridContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+
+[node name="btnSquare5" type="Button" parent="GridContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+
+[node name="btnSquare6" type="Button" parent="GridContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+
+[node name="btnSquare7" type="Button" parent="GridContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+
+[node name="btnSquare8" type="Button" parent="GridContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+
+[node name="btnSquare9" type="Button" parent="GridContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+
+[node name="lblStatus" type="Label" parent="."]
+offset_left = 77.0
+offset_top = 34.0
+offset_right = 624.0
+offset_bottom = 104.0
+theme_override_font_sizes/font_size = 41
+text = "Choose Token, X Goes First"
+horizontal_alignment = 1
+
+[node name="btnNewGame" type="Button" parent="."]
+offset_left = 223.0
+offset_top = 716.0
+offset_right = 474.0
+offset_bottom = 788.0
+theme_override_font_sizes/font_size = 46
+text = "New Game"
