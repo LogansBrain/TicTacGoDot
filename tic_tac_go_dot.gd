@@ -47,17 +47,13 @@ func check_pattern(check_symbol):
 	for i in range(8):
 		blank=0
 		matches=0
-		print("Checking Pattern: ",pattern[i]," Blanks: ",blank," Matches: ",matches)
 		for j in range(9):
-			print("P:",pattern[i]," C:",pattern[i][j]," B:", buttons[j].text," S:",check_symbol)
 			if pattern[i][j] == "*":
 				if buttons[j].text == check_symbol:
 					matches += 1
 				elif buttons[j].text == "":
 					blank = j+1  # add one to be used in verify
-			print("After J Counter, Blank: ",blank," Matches: ",matches)
 		if (matches == 2) and (blank > 0):
-			print("Found a SPECIAL place")
 			return blank
 	return 0
 
@@ -66,26 +62,20 @@ func checkgameover(symbol):
 	var full = true
 	var matches = 0
 
-	print("Checking for GAME OVER conditions.")
 	for i in range(8):  # 0-7 Number of (8) winning combos
 		matches = 0
 		for j in range(9): # 0-8 Number of (9) boxes
-			#print("I:",i," J:",j)
-			#print("P:",pattern[i]," C:",pattern[i][j]," B:", buttons[j].text," S:",symbol)
 			if (pattern[i][j] == "*") and (buttons[j].text == symbol):
 				matches += 1
-				#print("Match @",j," Matches: ",matches)
 				if matches == 3:
 					$lblStatus.text = symbol+" WINS!"
 					for button in buttons:
 						button.disabled=true
 					return true
-	# If noone won the game, check if all squares are full
 	full = true
 	for i in range(9):
 		if buttons[i].text == "":
 			full = false
-
 	if full:
 		$lblStatus.text = "Tie Game."
 		for button in buttons:
@@ -99,24 +89,18 @@ func computer_move():
 	var move
 	var try
 
-	print("Computer thinking...")
 	randomize()
 
 	move = 0
 	computermoves += 1
-	print("Computer Move Count: ", computermoves)
 
 	# Check for possible winning move
 	if move == 0:
-		print("Checking for Win")
 		move = check_pattern(SYMBOL[player_token^1])
-		print(move)
 
 	# Check for a place to block
 	if move == 0:
-		print("Checking for Block vs ",SYMBOL[player_token])
 		move = check_pattern(SYMBOL[player_token])
-		print(move)
 		
 	place = 0
 	done = false
@@ -139,8 +123,7 @@ func computer_move():
 		if buttons[place].text == "":
 			done = true
 			buttons[place].text = SYMBOL[player_token^1]
-	if checkgameover(SYMBOL[player_token^1]):
-		print("win after computer move detected")
+	checkgameover(SYMBOL[player_token^1])
 	playersturn=true
 	
 func _ready():
@@ -154,16 +137,11 @@ func _ready():
 func on_btnSquare_click(idx, clicked_button):
 	if not playersturn:
 		return
-	#print("New Game Status = ", new_game_status)
-	#print("Current Player #", current_player,", Symbol: ",SYMBOL[current_player])
-	#print("Button Index: ", idx)
 	if new_game_status:
 		if idx==3:
 			player_token=0
 		else:
 			player_token=1
-		#print("Player Token: ",SYMBOL[player_token])
-		#print("Computer Token: ",SYMBOL[player_token^1])
 		for button in buttons:
 			button.text=""
 			button.disabled=false
@@ -176,11 +154,8 @@ func on_btnSquare_click(idx, clicked_button):
 	if clicked_button.text=="":
 		clicked_button.text = SYMBOL[player_token]
 		playersturn=false
-		if checkgameover(SYMBOL[player_token]):
-			print("win after click detected")
-		else:
+		if !checkgameover(SYMBOL[player_token]):
 			computer_move()
 		
 func on_btnNewGame_click():
-	print("New Game Clicked")
 	new_game()
