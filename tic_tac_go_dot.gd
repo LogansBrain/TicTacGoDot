@@ -17,7 +17,6 @@ var pattern: Array[String] = ["***------",
 							 "--*--*--*",
 							 "*---*---*",
 							 "--*-*-*--"] 
-# Called when the node enters the scene tree the first time.
 
 func new_game():
 	var button_index = 0
@@ -45,24 +44,22 @@ func check_pattern(check_symbol):
 	var blank
 	var matches
 	
-	print("Checking Pattern")
 	for i in range(8):
-		print("I is ",i," and Pattern I is: ",pattern[i])
 		blank=0
 		matches=0
+		print("Checking Pattern: ",pattern[i]," Blanks: ",blank," Matches: ",matches)
 		for j in range(9):
+			print("P:",pattern[i]," C:",pattern[i][j]," B:", buttons[j].text," S:",check_symbol)
 			if pattern[i][j] == "*":
 				if buttons[j].text == check_symbol:
 					matches += 1
-				else:
-					if buttons[j].text == "":
-						blank = j
-
+				elif buttons[j].text == "":
+					blank = j+1  # add one to be used in verify
+			print("After J Counter, Blank: ",blank," Matches: ",matches)
 		if (matches == 2) and (blank > 0):
-			return blank+1
-
+			print("Found a SPECIAL place")
+			return blank
 	return 0
-
 
 func checkgameover(symbol):
 
@@ -117,7 +114,7 @@ func computer_move():
 
 	# Check for a place to block
 	if move == 0:
-		print("Checking for Block")
+		print("Checking for Block vs ",SYMBOL[player_token])
 		move = check_pattern(SYMBOL[player_token])
 		print(move)
 		
@@ -126,7 +123,6 @@ func computer_move():
 	try = 0
 	while !done:
 		try += 1
-		print("Try: ",try, " Done: ",done)
 		if move > 0:
 			place = move - 1
 		else:
@@ -139,12 +135,12 @@ func computer_move():
 					if buttons[4].text == SYMBOL[player_token]:
 						place = int(round(randi_range(0, 4))) * 2
 					else:
-						place = int(round(randi_range(0, 3)) * 2) + 1
+						place = int(round(randi_range(0, 4)) * 2) + 1
 		if buttons[place].text == "":
 			done = true
 			buttons[place].text = SYMBOL[player_token^1]
 	if checkgameover(SYMBOL[player_token^1]):
-		print("Game over.")
+		print("win after computer move detected")
 	playersturn=true
 	
 func _ready():
@@ -176,16 +172,15 @@ func on_btnSquare_click(idx, clicked_button):
 		if player_token==1:
 			computer_move()
 		return
+		
 	if clicked_button.text=="":
 		clicked_button.text = SYMBOL[player_token]
+		playersturn=false
 		if checkgameover(SYMBOL[player_token]):
-			print("win detected")
+			print("win after click detected")
 		else:
 			computer_move()
 		
-
 func on_btnNewGame_click():
 	print("New Game Clicked")
 	new_game()
-
-		
