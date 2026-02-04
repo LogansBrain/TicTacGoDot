@@ -3,7 +3,5 @@ I ported an old Player v. Computer version of TicTacToe I made in Visual Basic t
 
 I added the ability to choose your Token (X or O).
 
-I made the logic so the computer will not lose,
-if you beat the computer, please let me know!
-
-(There are situations the computer picks a random location that could not produce a win.)
+I was able to beat the computer 26/02/04 and that should not be possible.
+I can not remember the conditions. I believe I was "X" and started in the middle but forgot the rest.
