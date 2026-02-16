@@ -165,7 +165,7 @@ func computer_move():
 						place = int(round(randi_range(0, 4))) * 2
 					else:
 						# otherwise an odd (side) square
-						place = int(round(randi_range(0, 4)) * 2) + 1
+						place = int(round(randi_range(0, 3)) * 2) + 1
 		# if the square that we have chosen is blank then put a mark there
 		if buttons[place].text == "":
 			done = true
